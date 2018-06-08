@@ -1,0 +1,83 @@
+<div>
+    <h2>
+        <span>Images</span>
+        <button class="btn btn-primary float-right jh-create-entity create-images" [routerLink]="['/', { outlets: { popup: ['images-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Images
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="images">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Image</span></th>
+            <th><span>Galary</span></th>
+            <th><span>Activity</span></th>
+            <th><span>Facilities</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let images of images ;trackBy: trackId">
+                <td><a [routerLink]="['../images', images.id ]">{{images.id}}</a></td>
+                <td>{{images.name}}</td>
+                <td>
+                    <a *ngIf="images.image" (click)="openFile(images.imageContentType, images.image)">
+                        <img [src]="'data:' + images.imageContentType + ';base64,' + images.image" style="max-height: 30px;" alt="images image"/>
+                    </a>
+                    <span *ngIf="images.image">{{images.imageContentType}}, {{byteSize(images.image)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="images.galary">
+                        <a [routerLink]="['../galary', images.galary?.id ]" >{{images.galary?.galaryName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="images.activity">
+                        <a [routerLink]="['../activities', images.activity?.id ]" >{{images.activity?.activityName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="images.facilities">
+                        <a [routerLink]="['../facilities', images.facilities?.id ]" >{{images.facilities?.facilityName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../images', images.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'images/'+ images.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'images/'+ images.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

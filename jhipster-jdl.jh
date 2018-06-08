@@ -1,0 +1,27 @@
+	entity Galary {
+    	id Integer
+        galaryName String
+    }
+    
+    entity Images {
+		id Integer
+        name String
+        image ImageBlob
+	}
+    entity Activities {
+    	id Integer
+        activityName String
+        activityDetails String
+        image ImageBlob
+    }
+    entity Facilities {
+    	id Integer
+        facilityName String
+        facilityDetails String
+        image ImageBlob
+    }
+    relationship ManyToOne {
+    Images{Galary(galaryName)} to Galary
+    Images{Activity(activityName)} to Activities
+    Images{Facilities(facilityName)} to Facilities
+    }

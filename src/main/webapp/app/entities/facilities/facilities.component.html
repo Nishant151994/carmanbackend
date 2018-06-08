@@ -1,0 +1,67 @@
+<div>
+    <h2>
+        <span>Facilities</span>
+        <button class="btn btn-primary float-right jh-create-entity create-facilities" [routerLink]="['/', { outlets: { popup: ['facilities-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Facilities
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="facilities">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Facility Name</span></th>
+            <th><span>Facility Details</span></th>
+            <th><span>Image</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let facilities of facilities ;trackBy: trackId">
+                <td><a [routerLink]="['../facilities', facilities.id ]">{{facilities.id}}</a></td>
+                <td>{{facilities.facilityName}}</td>
+                <td>{{facilities.facilityDetails}}</td>
+                <td>
+                    <a *ngIf="facilities.image" (click)="openFile(facilities.imageContentType, facilities.image)">
+                        <img [src]="'data:' + facilities.imageContentType + ';base64,' + facilities.image" style="max-height: 30px;" alt="facilities image"/>
+                    </a>
+                    <span *ngIf="facilities.image">{{facilities.imageContentType}}, {{byteSize(facilities.image)}}</span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../facilities', facilities.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'facilities/'+ facilities.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'facilities/'+ facilities.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

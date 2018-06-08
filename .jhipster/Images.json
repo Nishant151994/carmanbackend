@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "galary",
+            "otherEntityName": "galary",
+            "otherEntityField": "galaryName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "activity",
+            "otherEntityName": "activities",
+            "otherEntityField": "activityName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "facilities",
+            "otherEntityName": "facilities",
+            "otherEntityField": "facilityName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20180529101813",
+    "entityTableName": "images",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

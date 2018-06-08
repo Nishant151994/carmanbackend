@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "galaryName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180530103548",
+    "entityTableName": "galary",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

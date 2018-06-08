@@ -1,0 +1,52 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myActivitiesLabel">Create or edit a Activities</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!activities.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="activities.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_activityName">Activity Name</label>
+            <input type="text" class="form-control" name="activityName" id="field_activityName"
+                [(ngModel)]="activities.activityName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_activityDetails">Activity Details</label>
+            <input type="text" class="form-control" name="activityDetails" id="field_activityDetails"
+                [(ngModel)]="activities.activityDetails" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_image">Image</label>
+            <div>
+                <img [src]="'data:' + activities.imageContentType + ';base64,' + activities.image" style="max-height: 100px;" *ngIf="activities.image" alt="activities image"/>
+                <div *ngIf="activities.image" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{activities.imageContentType}}, {{byteSize(activities.image)}}</span>
+                    <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_image" (change)="setFileData($event, activities, 'image', true)" accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                [(ngModel)]="activities.image" />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                [(ngModel)]="activities.imageContentType" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

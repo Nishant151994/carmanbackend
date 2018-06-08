@@ -1,0 +1,39 @@
+
+<div *ngIf="facilities">
+    <h2><span>Facilities</span> {{facilities.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Facility Name</span></dt>
+        <dd>
+            <span>{{facilities.facilityName}}</span>
+        </dd>
+        <dt><span>Facility Details</span></dt>
+        <dd>
+            <span>{{facilities.facilityDetails}}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <div *ngIf="facilities.image">
+                <a (click)="openFile(facilities.imageContentType, facilities.image)">
+                    <img [src]="'data:' + facilities.imageContentType + ';base64,' + facilities.image" style="max-width: 100%;" alt="facilities image"/>
+                </a>
+                {{facilities.imageContentType}}, {{byteSize(facilities.image)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'facilities/'+ facilities.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
